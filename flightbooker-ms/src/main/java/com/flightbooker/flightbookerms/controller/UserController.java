@@ -14,6 +14,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //TODO all crud methods for users. Controller should return api models instead of entities
+
     @GetMapping("/users")
     public List<User> getAll() {
         return userService.getAll();

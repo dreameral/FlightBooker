@@ -5,14 +5,16 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "route")
 @Data
-@Table(name = "users")
-public class User {
+public class Route {
     @Id
     @GeneratedValue
     private Integer id;
-    private String username;
-    private String password;
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Location departure;
+    @Enumerated(EnumType.STRING)
+    private Location destination;
+    @Enumerated(EnumType.STRING)
+    private Airline airline;
 }
