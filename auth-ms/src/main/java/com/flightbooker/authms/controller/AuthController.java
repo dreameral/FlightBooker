@@ -4,7 +4,9 @@ import com.flightbooker.authms.model.entity.User;
 import com.flightbooker.authms.model.entity.UserRole;
 import com.flightbooker.authms.repository.UserRepository;
 import com.flightbooker.authms.security.jwt.JwtUtils;
+import com.flightbooker.authms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,9 +25,6 @@ import java.util.Map;
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -33,16 +32,19 @@ public class AuthController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody Map<String, String> body) {
         String username = body.get("username");
         String password = body.get("password");
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+        if (!userService.verifyCredentials(username, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String jwt = jwtUtils.generateJwtToken(username, password);
 
         Map<String, String> response = new HashMap<>();
         response.put("jwt", jwt);
