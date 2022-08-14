@@ -1,0 +1,10 @@
+delete from segments;
+insert into segments (departure, destination, airline) values ('TIA', 'MIL', 'LUFTHANSA');
+insert into segments (departure, destination, airline) values ('PAR', 'NTE', 'WIZZAIR');
+insert into segments (departure, destination, airline) values ('PAR', 'BER', 'ALBAWINGS');
+insert into segments (departure, destination, airline) values ('MIL', 'ROM', 'ALBAWINGS');
+insert into segments (departure, destination, airline) values ('ROM', 'FRA', 'ALBAWINGS');
+insert into segments (departure, destination, airline) values ('ROM', 'AYT', 'LUFTHANSA');
+insert into segments (departure, destination, airline) values ('TIA', 'IST', 'WIZZAIR');
+insert into segments (departure, destination, airline) values ('IST', 'BER', 'WIZZAIR');
+insert into segments (departure, destination, airline) values ('BER', 'FRA', 'WIZZAIR');

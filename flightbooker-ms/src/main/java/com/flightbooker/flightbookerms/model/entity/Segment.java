@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "route")
 @Data
-public class Route {
+@Table(name = "segments")
+public class Segment {
     @Id
     @GeneratedValue
     private Integer id;
