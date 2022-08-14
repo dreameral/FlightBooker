@@ -3,6 +3,7 @@ package com.flightbooker.flightbookerms.model;
 import com.flightbooker.flightbookerms.model.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 import java.util.Collection;
 

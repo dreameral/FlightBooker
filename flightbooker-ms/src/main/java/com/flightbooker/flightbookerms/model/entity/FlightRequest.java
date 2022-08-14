@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "flight_requests")
@@ -14,9 +13,11 @@ public class FlightRequest {
     @Id
     @GeneratedValue
     private Integer id;
+    @Enumerated(EnumType.STRING)
     private Location departure;
+    @Enumerated(EnumType.STRING)
     private Location destination;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Basic
     private LocalDate departureTime;
     private String route;
     @Enumerated(EnumType.STRING)

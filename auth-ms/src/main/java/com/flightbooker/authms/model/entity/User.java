@@ -2,10 +2,7 @@ package com.flightbooker.authms.model.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -16,5 +13,6 @@ public class User {
     private Integer id;
     private String username;
     private String password;
-    private UserRole role;
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 }

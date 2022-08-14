@@ -3,8 +3,8 @@ package com.flightbooker.flightbookerms.controller;
 import com.flightbooker.flightbookerms.model.entity.User;
 import com.flightbooker.flightbookerms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,13 +12,31 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    //TODO all crud methods for users. Controller should return api models instead of entities
+    private UserService service;
 
     @GetMapping("/users")
     public List<User> getAll() {
-        return userService.getAll();
+        return service.getAll();
     }
+
+    @PostMapping("/users")
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        service.saveUser(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/users/{id}")
+    public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable("id") Integer id) {
+        user.setId(id);
+        service.saveUser(user);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
+        service.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

@@ -8,10 +8,6 @@ import com.flightbooker.authms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,13 +53,13 @@ public class AuthController {
         String password = body.get("password");
 
         if (!StringUtils.hasText(username) || !StringUtils.hasText(password)) {
-            // TODO throw bad request exception
+            return ResponseEntity.badRequest().body("Username and password ar required to register.");
         }
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
-        user.setRole(UserRole.ADMIN);
+        user.setUserRole(UserRole.ADMIN);
 
         userRepository.save(user);
 
