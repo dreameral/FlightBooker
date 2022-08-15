@@ -31,7 +31,7 @@ public class AuthenticationFilter implements GatewayFilter {
             if (this.isAuthMissing(request))
                 return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
 
-            final String token = this.getAuthHeader(request);
+            final String token = this.getTokenFromHeader(request);
 
             if (jwtUtil.isInvalid(token))
                 return this.onError(exchange, "Authorization header is invalid", HttpStatus.UNAUTHORIZED);
@@ -53,8 +53,8 @@ public class AuthenticationFilter implements GatewayFilter {
         return response.setComplete();
     }
 
-    private String getAuthHeader(ServerHttpRequest request) {
-        return request.getHeaders().getOrEmpty("Authorization").get(0);
+    private String getTokenFromHeader(ServerHttpRequest request) {
+        return request.getHeaders().getOrEmpty("Authorization").get(0).substring(7);
     }
 
     private boolean isAuthMissing(ServerHttpRequest request) {

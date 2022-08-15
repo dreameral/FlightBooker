@@ -25,18 +25,17 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/users/{id}")
-    public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable("id") Integer id) {
+    @PutMapping("/users/{id}")
+    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
         user.setId(id);
         service.saveUser(user);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/users/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }

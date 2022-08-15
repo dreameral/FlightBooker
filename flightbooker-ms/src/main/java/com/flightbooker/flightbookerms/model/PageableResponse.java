@@ -1,9 +1,12 @@
 package com.flightbooker.flightbookerms.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +16,9 @@ public class PageableResponse<T> {
     private List<T> items;
     private int size;
     private int page;
-    @JsonUnwrapped
-    private Map<String, Object> otherProperties;
+    @JsonAnyGetter
+    @JsonIgnore
+    private Map<String, Object> otherProperties = new HashMap<>();
 
     public PageableResponse() {}
 

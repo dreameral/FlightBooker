@@ -12,16 +12,16 @@ public class SpringCloudGatewayRouting {
     @Autowired
     private AuthenticationFilter authenticationFilter;
 
-//    @Bean
-//    public RouteLocator configureRoute(RouteLocatorBuilder builder) {
-//        return builder.routes()
-//                .route("AUTH-MS", r->r.path("/auth/**")
-////                        .filters(f -> f.filter(authenticationFilter))
-//                        .uri("lb://localhost:8762/"))
-//                .route("flightId", r->r.path("/flight/**")
-////                        .filters(f -> f.filter(authenticationFilter))
-//                        .uri("lb://flightbooker-ms"))
-//                .build();
-//    }
+    @Bean
+    public RouteLocator configureRoute(RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route("authId", r->r.path("/auth/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("http://localhost:8762"))
+                .route("flightId", r->r.path("/flight/**")
+                        .filters(f -> f.filter(authenticationFilter))
+                        .uri("http://localhost-8763"))
+                .build();
+    }
 
 }

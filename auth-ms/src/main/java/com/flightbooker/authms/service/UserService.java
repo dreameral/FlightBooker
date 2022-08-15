@@ -18,7 +18,7 @@ public class UserService {
 
     public boolean verifyCredentials(String username, String password) {
         Optional<User> optionalUser = userRepository.findByUsername(username);
-        return optionalUser.map(user -> user.getPassword().equals(passwordEncoder.encode(password))).orElse(Boolean.FALSE);
+        return optionalUser.map(user -> passwordEncoder.matches(password, user.getPassword())).orElse(Boolean.FALSE);
     }
 
 }

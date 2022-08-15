@@ -24,6 +24,7 @@ create table if not exists notifications (
     id serial primary key,
     content varchar (100) not null,
     is_read boolean not null,
+    notification_type varchar (20) not null,
     user_id int not null,
     foreign key (user_id) references users (id)
     );

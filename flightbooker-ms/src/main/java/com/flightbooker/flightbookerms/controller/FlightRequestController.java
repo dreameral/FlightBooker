@@ -83,7 +83,7 @@ public class FlightRequestController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("ok", success);
-        response.put("message", success ? "Flight was booked successfully." : "Flight booking failed.");
+        response.put("message", success ? "Flight was resolved successfully." : "Something went wrong.");
         return ResponseEntity.ok(response);
     }
 }

@@ -14,16 +14,26 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FlightApiModel {
     private UUID uuid;
+    private Integer flightId;
     private Location departure;
     private Location destination;
     private LocalDate departureTime;
     private String route;
 
     public FlightApiModel() {
+    }
 
+    public FlightApiModel(UUID uuid, Integer flightId, Location departure, Location destination, LocalDate departureTime, String route) {
+        this.uuid = uuid;
+        this.flightId = flightId;
+        this.departure = departure;
+        this.destination = destination;
+        this.departureTime = departureTime;
+        this.route = route;
     }
 
     public FlightApiModel(FlightRequest flightRequest) {
+        this.flightId = flightRequest.getId();
         this.departure = flightRequest.getDeparture();
         this.destination = flightRequest.getDestination();
         this.departureTime = flightRequest.getDepartureTime();

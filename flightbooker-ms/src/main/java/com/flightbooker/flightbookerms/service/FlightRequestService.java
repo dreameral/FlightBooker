@@ -1,10 +1,7 @@
 package com.flightbooker.flightbookerms.service;
 
 import com.flightbooker.flightbookerms.model.FlightApiModel;
-import com.flightbooker.flightbookerms.model.entity.FlightRequest;
-import com.flightbooker.flightbookerms.model.entity.FlightRequestStatus;
-import com.flightbooker.flightbookerms.model.entity.Location;
-import com.flightbooker.flightbookerms.model.entity.User;
+import com.flightbooker.flightbookerms.model.entity.*;
 import com.flightbooker.flightbookerms.repository.FlightModelRepository;
 import com.flightbooker.flightbookerms.repository.FlightRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +77,9 @@ public class FlightRequestService {
             reason = String.format("Your flight request to '%s' has been approved.", flightRequest.get().getRoute());
         }
 
-        notificationService.createNotification(reason, flightRequest.get().getRequestedBy());
+        notificationService.createNotification(reason,
+                status == FlightRequestStatus.APPROVED ? NotificationType.FLIGHT_APPROVED : NotificationType.FLIGHT_REJECTED,
+                flightRequest.get().getRequestedBy());
 
         return true;
     }
